@@ -16,5 +16,5 @@ class Problema_Laborator(object):
     def get_descriere(self):
         return self.__descriere
 
-    def get_dead__deadline(self):
+    def get_deadline(self):
         return self.__deadline

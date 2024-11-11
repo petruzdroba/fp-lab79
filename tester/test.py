@@ -1,9 +1,11 @@
 import domain.student
+from domain.problema_lab import Problema_Laborator
 from service.student_service import Student_Service
 
 
 class Test(object):
     test_student_list = []
+    test_problem_list = []
 
     def __init__(self):
         pass
@@ -26,6 +28,17 @@ class Test(object):
         assert student_id == student.get_id()
         assert nume == student.get_nume()
         assert grupa == student.get_grupa()
+
+    def test_creeaza_problema(self):
+        laborator_numar = 7
+        descriere = "o problema foarte frumoasa"
+        deadline = "11/11/2024"
+
+        problema_test = Problema_Laborator(laborator_numar, descriere, deadline)
+
+        assert laborator_numar == problema_test.get_laborator_numar()
+        assert descriere == problema_test.get_descriere()
+        assert deadline == problema_test.get_deadline()
 
     def test_adauga_student_lista(self, test_student_list: list):
         student_id = 17
