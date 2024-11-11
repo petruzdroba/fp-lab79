@@ -4,10 +4,10 @@ class Student(object):
         self.__nume = nume
         self.__grupa = grupa
 
-    def set_name(self, nume_nou: str):
+    def set_nume(self, nume_nou: str):
         self.__nume = nume_nou
 
-    def set_name(self, grupa: str):
+    def set_grupa(self, grupa: str):
         self.__grupa = grupa
 
     def get_id(self):

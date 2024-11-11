@@ -1,5 +1,5 @@
 import domain.student
-from service.student_service import add_student_to_list
+from service.student_service import Student_Service
 
 
 class Test(object):
@@ -34,7 +34,9 @@ class Test(object):
 
         student = domain.student.Student(student_id, nume, grupa)
 
-        add_student_to_list(test_student_list, student)
+        service = Student_Service()
+
+        service.add_student_to_list(test_student_list, student)
 
         assert test_student_list[0] == student
 
