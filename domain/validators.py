@@ -18,3 +18,15 @@ class Validator(object):
             raise ValueError("nume invalid")
         if grupa < 0:
             raise ValueError("grupa invalida")
+
+    def valideaza_problema(self, laborator_numar: int, descirere: str, deadline: str):
+        """
+        Fucntie care valideaza datele de intrare pt un obiect problema
+
+        """
+        if laborator_numar < 0:
+            raise ValueError("numar laborator invalid")
+        if descirere == "":
+            raise ValueError("descriere invalida")
+        if deadline == "":
+            raise ValueError("deadl;ine invalid")

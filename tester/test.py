@@ -1,6 +1,8 @@
 import domain.student
 from domain.problema_lab import Problema_Laborator
+
 from service.student_service import Student_Service
+from service.probleme_service import Problema_Service
 
 
 class Test(object):
@@ -16,7 +18,9 @@ class Test(object):
         :return: -
         """
         self.test_creeaza_student()
+        self.test_creeaza_problema()
         self.test_adauga_student_lista(self.test_student_list)
+        self.test_adauga_problema_lista(self.test_problem_list)
 
     def test_creeaza_student(self):
         student_id = 17
@@ -54,3 +58,16 @@ class Test(object):
         assert test_student_list[0] == student
 
         print("Tests passed succesfully")
+
+    def test_adauga_problema_lista(self, test_problem_list: list):
+        laborator_numar = 7
+        descriere = "o problema foarte frumoasa"
+        deadline = "11/11/2024"
+
+        problema_test = Problema_Laborator(laborator_numar, descriere, deadline)
+
+        service = Problema_Service()
+
+        service.add_problem_to_list(test_problem_list, problema_test)
+
+        assert test_problem_list[0] == problema_test

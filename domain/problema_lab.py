@@ -1,5 +1,5 @@
 class Problema_Laborator(object):
-    def __intit__(self, laborator_numar: int, descriere: str, deadline: str):
+    def __init__(self, laborator_numar: int, descriere: str, deadline: str):
         self.__laborator_numar = laborator_numar
         self.__descriere = descriere
         self.__deadline = deadline
