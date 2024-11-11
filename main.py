@@ -6,5 +6,6 @@ teste = Test()
 teste.ruleaza_toate_testele()
 
 student_list = []
+question_list = []
 
-meniu_consola(student_list)
+meniu_consola(student_list, question_list)

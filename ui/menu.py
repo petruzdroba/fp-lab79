@@ -1,9 +1,13 @@
 from service.student_service import Student_Service
+from service.probleme_service import Problema_Service
+
 from domain.student import Student
+from domain.problema_lab import Problema_Laborator
 
 
-def meniu_consola(student_list: list):
+def meniu_consola(student_list: list, question_list: list):
     print("1. Adauga student")
+    print("2. Adauga problema")
     choice = int(input(">>>"))
 
     if choice == 1:
@@ -13,6 +17,13 @@ def meniu_consola(student_list: list):
 
         student = Student(student_id, nume, grupa)
 
-        service = Student_Service()
+        Student_Service().add_student_to_list(student_list, student)
 
-        service.add_student_to_list(student_list, student)
+    if choice == 2:
+        numar_lab = int(input("numar_laborator>>>"))
+        descriere = input("descriere>>>")
+        deadline = input("deadline>>>")
+
+        problema = Problema_Laborator(numar_lab, descriere, deadline)
+
+        Problema_Service().add_problem_to_list(question_list, problema)
