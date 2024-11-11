@@ -9,3 +9,12 @@ class Student(object):
 
     def set_name(self, grupa: str):
         self.__grupa = grupa
+
+    def get_id(self):
+        return self.__student_id
+
+    def get_nume(self):
+        return self.__nume
+
+    def get_grupa(self):
+        return self.__grupa
