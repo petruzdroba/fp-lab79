@@ -23,6 +23,7 @@ class Test(object):
         self.test_adauga_problema_lista(self.test_problem_list)
 
         self.test_sterge_student_din_lista(self.test_student_list)
+        self.test_sterge_problema_din_lista(self.test_problem_list)
 
     def test_creeaza_student(self):
         student_id = 17
@@ -82,3 +83,12 @@ class Test(object):
         service.delete_student_from_list(test_student_list, student_id)
 
         assert len(test_student_list) == 0
+
+    def test_sterge_problema_din_lista(self, test_question_list: list):
+        numar_laborator = 7
+
+        service = Problema_Service()
+
+        service.delete_problem_from_list(test_question_list, numar_laborator)
+
+        assert len(test_question_list) == 0

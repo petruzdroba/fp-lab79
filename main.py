@@ -5,10 +5,10 @@ import os
 
 teste = Test()
 
+os.system("cls")
 teste.ruleaza_toate_testele()
 
 student_list = []
 question_list = []
 
-os.system("cls")
 meniu_consola(student_list, question_list)

@@ -29,6 +29,11 @@ class Student_Service(object):
         :return -
             raise ValueError cu mesajul "student inexistent"
         """
+        found = False
         for student in student_list:
             if student.get_id() == student_id:
                 student_list.pop(student_list.index(student))
+                found = True
+                break
+        if not found:
+            raise ValueError("student inexistent")
