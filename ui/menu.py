@@ -6,8 +6,23 @@ from domain.problema_lab import Problema_Laborator
 
 
 def meniu_consola(student_list: list, question_list: list):
+    print("1. Studenti")
+    print("2. Probleme")
+    print("3. Exit")
+    choice = int(input(">>>"))
+
+    if choice == 1:
+        meniu_studenti(student_list)
+        meniu_consola(student_list, question_list)
+    elif choice == 2:
+        meniu_probleme_laborator(question_list)
+        meniu_consola(student_list, question_list)
+    else:
+        return 0
+
+
+def meniu_studenti(student_list: list):
     print("1. Adauga student")
-    print("2. Adauga problema")
     choice = int(input(">>>"))
 
     if choice == 1:
@@ -18,8 +33,13 @@ def meniu_consola(student_list: list, question_list: list):
         student = Student(student_id, nume, grupa)
 
         Student_Service().add_student_to_list(student_list, student)
-        meniu_consola(student_list, question_list)
-    elif choice == 2:
+        meniu_studenti(student_list)
+
+
+def meniu_probleme_laborator(question_list: list):
+    print("1. Adauga problema laborator")
+    choice = int(input(">>>"))
+    if choice == 1:
         numar_lab = int(input("numar_laborator>>>"))
         descriere = input("descriere>>>")
         deadline = input("deadline>>>")
@@ -27,6 +47,4 @@ def meniu_consola(student_list: list, question_list: list):
         problema = Problema_Laborator(numar_lab, descriere, deadline)
 
         Problema_Service().add_problem_to_list(question_list, problema)
-        meniu_consola(student_list, question_list)
-    else:
-        return 0
+        meniu_probleme_laborator(question_list)
