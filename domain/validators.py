@@ -6,13 +6,12 @@ class Validator(object):
     def __init__(self) -> None:
         pass
 
-    def valideaza_student(self, student: Student):
+    def valideaza_student(self, student: Student, student_list: list):
         """
         Functie care valideaza datele de intrare pentru creearea unui nou student
         input:
-            student_id :int
-            nume: string
-            grupa : int
+            student : Student
+            student_list : list
         :return : -
                 raise ValueError with the message "id invalid", "nume invalid", "grupa invalida"
         """
@@ -23,21 +22,11 @@ class Validator(object):
         if student.get_grupa() < 0:
             raise ValueError("grupa invalida")
 
-    def valideaza_student_id(self, student_id: int, student_list: list):
-        """
-        Functie care verifica ca id-ul introdus de la tastatura sa fie unic
-        input:
-            student_id : int
-            student_list : list
-        :return -
-            raise ValueError cu mesajul "id nu este unic"
-        """
-        id_list = []
-        for student in student_list:
-            id_list.append(student.get_id())
-        pass
+        for elev in student_list:
+            if student.get_id() == elev.get_id():
+                raise ValueError("id nu e unic")
 
-    def valideaza_problema(self, problema_lab: Problema_Laborator):
+    def valideaza_problema(self, problema_lab: Problema_Laborator, question_list: list):
         """
         Fucntie care valideaza datele de intrare pt un obiect problema
 
@@ -48,3 +37,7 @@ class Validator(object):
             raise ValueError("descriere invalida")
         if problema_lab.get_deadline() == "":
             raise ValueError("deadline invalid")
+
+        for problema in question_list:
+            if problema_lab.get_laborator_numar() == problema.get_laborator_numar():
+                raise ValueError("numar laborator nu e unic")

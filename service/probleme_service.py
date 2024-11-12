@@ -18,10 +18,6 @@ class Problema_Service(object):
         """
         valideaza = Validator()
 
-        valideaza.valideaza_problema(
-            problema.get_laborator_numar(),
-            problema.get_descriere(),
-            problema.get_deadline(),
-        )
+        valideaza.valideaza_problema(problema, list_of_questions)
 
         list_of_questions.append(problema)
