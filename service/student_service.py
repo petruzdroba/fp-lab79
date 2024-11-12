@@ -16,7 +16,6 @@ class Student_Service(object):
 
         valideaza = Validator()
 
-        valideaza.valideaza_student(
-            student.get_id(), student.get_nume(), student.get_grupa()
-        )
+        valideaza.valideaza_student(student)
+
         student_list.append(student)

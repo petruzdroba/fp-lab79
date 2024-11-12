@@ -18,8 +18,8 @@ def meniu_consola(student_list: list, question_list: list):
         student = Student(student_id, nume, grupa)
 
         Student_Service().add_student_to_list(student_list, student)
-
-    if choice == 2:
+        meniu_consola(student_list, question_list)
+    elif choice == 2:
         numar_lab = int(input("numar_laborator>>>"))
         descriere = input("descriere>>>")
         deadline = input("deadline>>>")
@@ -27,3 +27,6 @@ def meniu_consola(student_list: list, question_list: list):
         problema = Problema_Laborator(numar_lab, descriere, deadline)
 
         Problema_Service().add_problem_to_list(question_list, problema)
+        meniu_consola(student_list, question_list)
+    else:
+        return 0
