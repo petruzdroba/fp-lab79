@@ -22,6 +22,8 @@ class Test(object):
         self.test_adauga_student_lista(self.test_student_list)
         self.test_adauga_problema_lista(self.test_problem_list)
 
+        self.test_sterge_student_din_lista(self.test_student_list)
+
     def test_creeaza_student(self):
         student_id = 17
         nume = "John Doe"
@@ -71,3 +73,12 @@ class Test(object):
         service.add_problem_to_list(test_problem_list, problema_test)
 
         assert test_problem_list[0] == problema_test
+
+    def test_sterge_student_din_lista(self, test_student_list: list):
+        student_id = 17
+
+        service = Student_Service()
+
+        service.delete_student_from_list(test_student_list, student_id)
+
+        assert len(test_student_list) == 0
