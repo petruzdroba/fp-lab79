@@ -1,14 +1,12 @@
 from domain.problema_lab import Problema_Laborator
-from domain.validators import Validator
 
 
 class Problema_Service(object):
-    def __init__(self) -> None:
-        pass
+    def __init__(self, validaor_laborator, laborator_repo):
+        self.__valideaza_laborator = validaor_laborator
+        self.__laborator_repo = laborator_repo
 
-    def add_problem_to_list(
-        self, list_of_questions: list, problema: Problema_Laborator
-    ):
+    def add_problem_to_list(self, numar_laborator: int, descriere: str, deadline: str):
         """
         Functie care adauga o problema la lista de probleme
         import :
@@ -16,28 +14,29 @@ class Problema_Service(object):
             problem : obj
         :returns : -
         """
-        valideaza = Validator()
 
-        valideaza.valideaza_problema(problema, list_of_questions)
+        laborator = Problema_Laborator(numar_laborator, descriere, deadline)
 
-        list_of_questions.append(problema)
+        self.__valideaza_laborator.valideaza_laborator(laborator)
 
-    def delete_problem_from_list(self, list_of_questions: list, numar_laborator: int):
-        """
-        Functie care sterge problema cu numarul de laborator numar_laborator din lista
-        input:
-            numar_laborator : int
-            list_of_questions : lsit
-        :return -
-            raise Value Error cu mesajul "problema inexistenta"
-        """
-        found = False
+        self.__laborator_repo.add_laborator(laborator)
 
-        for question in list_of_questions:
-            if question.get_laborator_numar() == numar_laborator:
-                list_of_questions.pop(list_of_questions.index(question))
-                found = True
-                break
+    # def delete_problem_from_list(self, list_of_questions: list, numar_laborator: int):
+    #     """
+    #     Functie care sterge problema cu numarul de laborator numar_laborator din lista
+    #     input:
+    #         numar_laborator : int
+    #         list_of_questions : lsit
+    #     :return -
+    #         raise Value Error cu mesajul "problema inexistenta"
+    #     """
+    #     found = False
 
-        if not found:
-            raise ValueError("problema inexistenta")
+    #     for question in list_of_questions:
+    #         if question.get_laborator_numar() == numar_laborator:
+    #             list_of_questions.pop(list_of_questions.index(question))
+    #             found = True
+    #             break
+
+    #     if not found:
+    #         raise ValueError("problema inexistenta")

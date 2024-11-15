@@ -1,63 +1,45 @@
-from service.student_service import Student_Service
-from service.probleme_service import Problema_Service
+class Consola:
+    def __init__(self, student_service, laborator_service):
+        self.__student_service = student_service
+        self.__laborator_service = laborator_service
+        self.__comenzi = {
+            "add_student": self.__ui_add_student,
+            "add_laborator": self.__ui_add_laborator,
+            "show_studenti": self.__ui_show_studenti,
+        }
 
-from domain.student import Student
-from domain.problema_lab import Problema_Laborator
-
-
-def meniu_consola(student_list: list, question_list: list):
-    print("1. Studenti")
-    print("2. Probleme")
-    print("3. Exit")
-    choice = int(input(">>>"))
-
-    if choice == 1:
-        meniu_studenti(student_list)
-        meniu_consola(student_list, question_list)
-    elif choice == 2:
-        meniu_probleme_laborator(question_list)
-        meniu_consola(student_list, question_list)
-    else:
-        return 0
-
-
-def meniu_studenti(student_list: list):
-    print("1. Adauga student")
-    print("2. Sterge student")
-    choice = int(input(">>>"))
-
-    if choice == 1:
-        student_id = int(input("id>>>"))
+    def __ui_add_student(self):
+        id_student = int(input("id>>>"))
         nume = input("nume>>>")
         grupa = int(input("grupa>>>"))
+        self.__student_service.add_student_to_list(id_student, nume, grupa)
 
-        student = Student(student_id, nume, grupa)
-
-        Student_Service().add_student_to_list(student_list, student)
-        meniu_studenti(student_list)
-    elif choice == 2:
-        student_id = int(input("id>>>"))
-
-        Student_Service().delete_student_from_list(student_list, student_id)
-
-        meniu_studenti(student_list)
-
-
-def meniu_probleme_laborator(question_list: list):
-    print("1. Adauga problema laborator")
-    print("2. Sterge problema laborator")
-    choice = int(input(">>>"))
-    if choice == 1:
-        numar_lab = int(input("numar_laborator>>>"))
+    def __ui_add_laborator(self):
+        numar_lab = int(input("nrlab>>>"))
         descriere = input("descriere>>>")
         deadline = input("deadline>>>")
 
-        problema = Problema_Laborator(numar_lab, descriere, deadline)
+        self.__laborator_service.add_problem_to_list(numar_lab, descriere, deadline)
 
-        Problema_Service().add_problem_to_list(question_list, problema)
-        meniu_probleme_laborator(question_list)
-    elif choice == 2:
-        numar_lab = int(input("numar_laborator>>>"))
-        Problema_Service.delete_problem_from_list(question_list, numar_lab)
+    def __ui_show_studenti(self):
+        studenti = self.__student_service.get_all_students()
+        for student in studenti:
+            print(student)  # Print each student's details
 
-        meniu_probleme_laborator(question_list)
+    def run(self):
+        while True:
+            nume_comanda = input(">>>")
+            nume_comanda = nume_comanda.lower().strip()
+            if nume_comanda == "":
+                continue
+
+            if nume_comanda == "exit":
+                break
+
+            if nume_comanda in self.__comenzi:
+                try:
+                    self.__comenzi[nume_comanda]()
+                except ValueError:
+                    print("valoare numerica invalida!\n")
+            else:
+                print("comanda invalida!\n")
