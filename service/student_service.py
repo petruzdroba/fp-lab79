@@ -8,10 +8,11 @@ class Student_Service(object):
 
     def add_student_to_list(self, student_id: int, nume: str, grupa: int):
         """
-        Functie care adauga un student intr-o lista
+        Functie care valideaza si creeaza obiectul student
         input:
-            student_list : list
-            student: student obj
+            student_id : int
+            nume : string
+            grupa : int
         """
 
         student = Student(student_id, nume, grupa)
