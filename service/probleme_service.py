@@ -21,6 +21,10 @@ class Problema_Service(object):
 
         self.__laborator_repo.add_laborator(laborator)
 
+    def get_all_laborators(self):
+        lab_list = self.__laborator_repo.get_laborators_list().values()
+        return [str(labs) for labs in lab_list]
+
     # def delete_problem_from_list(self, list_of_questions: list, numar_laborator: int):
     #     """
     #     Functie care sterge problema cu numarul de laborator numar_laborator din lista

@@ -5,7 +5,8 @@ class Consola:
         self.__comenzi = {
             "add_student": self.__ui_add_student,
             "add_laborator": self.__ui_add_laborator,
-            "show_studenti": self.__ui_show_studenti,
+            "show_students": self.__ui_show_studenti,
+            "show_laborators": self.__ui_show_laborators,
         }
 
     def __ui_add_student(self):
@@ -24,7 +25,12 @@ class Consola:
     def __ui_show_studenti(self):
         studenti = self.__student_service.get_all_students()
         for student in studenti:
-            print(student)  # Print each student's details
+            print(student)
+
+    def __ui_show_laborators(self):
+        labs = self.__laborator_service.get_all_laborators()
+        for lab in labs:
+            print(lab)
 
     def run(self):
         while True:

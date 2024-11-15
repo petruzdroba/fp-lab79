@@ -18,3 +18,10 @@ class Problema_Laborator(object):
 
     def get_deadline(self):
         return self.__deadline
+
+    def __str__(self):
+        return f"""
+    LABORATOR : {self.__laborator_numar}
+    DESCRIERE : {self.__descriere}
+    DEADLINE : {self.__deadline}
+    """
