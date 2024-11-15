@@ -5,7 +5,7 @@ class StudentValidator(object):
     def __init__(self) -> None:
         pass
 
-    def valideaza_student(self, student: Student, student_list: list):
+    def valideaza_student(self, student: Student):
         """
         Functie care valideaza datele de intrare pentru creearea unui nou student
         input:
@@ -20,7 +20,3 @@ class StudentValidator(object):
             raise ValueError("nume invalid")
         if student.get_grupa() < 0:
             raise ValueError("grupa invalida")
-
-        for elev in student_list:
-            if student.get_id() == elev.get_id():
-                raise ValueError("id nu e unic")

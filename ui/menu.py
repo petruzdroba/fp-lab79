@@ -1,13 +1,30 @@
 class Consola:
-    def __init__(self, student_service):
+    def __init__(self, student_service, laborator_service):
         self.__student_service = student_service
-        self.__comenzi = {"add_student": self.__ui_add_student}
+        self.__laborator_service = laborator_service
+        self.__comenzi = {
+            "add_student": self.__ui_add_student,
+            "add_laborator": self.__ui_add_laborator,
+            "show_studenti": self.__ui_show_studenti,
+        }
 
     def __ui_add_student(self):
         id_student = int(input("id>>>"))
         nume = input("nume>>>")
         grupa = int(input("grupa>>>"))
         self.__student_service.add_student_to_list(id_student, nume, grupa)
+
+    def __ui_add_laborator(self):
+        numar_lab = int(input("nrlab>>>"))
+        descriere = input("descriere>>>")
+        deadline = input("deadline>>>")
+
+        self.__laborator_service.add_problem_to_list(numar_lab, descriere, deadline)
+
+    def __ui_show_studenti(self):
+        studenti = self.__student_service.get_all_students()
+        for student in studenti:
+            print(student)  # Print each student's details
 
     def run(self):
         while True:

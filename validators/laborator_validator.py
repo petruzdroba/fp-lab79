@@ -5,18 +5,14 @@ class LaboratorValidator(object):
     def __init__(self) -> None:
         pass
 
-    def valideaza_problema(self, problema_lab: Problema_Laborator, question_list: list):
+    def valideaza_laborator(self, laborator: Problema_Laborator):
         """
         Fucntie care valideaza datele de intrare pt un obiect problema
 
         """
-        if problema_lab.get_laborator_numar() < 0:
+        if laborator.get_laborator_numar() < 0:
             raise ValueError("numar laborator invalid")
-        if problema_lab.get_descriere() == "":
+        if laborator.get_descriere() == "":
             raise ValueError("descriere invalida")
-        if problema_lab.get_deadline() == "":
+        if laborator.get_deadline() == "":
             raise ValueError("deadline invalid")
-
-        for problema in question_list:
-            if problema_lab.get_laborator_numar() == problema.get_laborator_numar():
-                raise ValueError("numar laborator nu e unic")

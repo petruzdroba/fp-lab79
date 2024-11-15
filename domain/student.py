@@ -18,3 +18,10 @@ class Student(object):
 
     def get_grupa(self):
         return self.__grupa
+
+    def __str__(self):
+        return f"""
+    NUME : {self.__nume}
+    ID : {self.__student_id}
+    GRUPA : {self.__grupa}  
+    """

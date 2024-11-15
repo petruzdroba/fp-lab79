@@ -17,11 +17,13 @@ class Student_Service(object):
 
         student = Student(student_id, nume, grupa)
 
-        self.__valideaza_student.valideaza_student(
-            student, self.__student_repo.get_student_list()
-        )
+        self.__valideaza_student.valideaza_student(student)
 
         self.__student_repo.add_student(student)
+
+    def get_all_students(self):
+        student_list = self.__student_repo.get_student_list().values()
+        return [str(student) for student in student_list]
 
     # def delete_student_from_list(self, student_list: list, student_id: int):
     #     """
