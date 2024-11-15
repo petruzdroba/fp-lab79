@@ -9,5 +9,5 @@ class StudentRepo(object):
         return self.__student_list
 
     def add_student(self, student: Student):
-        id_student = student.get_id_student()
-        self.__studenti[id_student] = student
+        id_student = student.get_id()
+        self.__student_list[id_student] = student
