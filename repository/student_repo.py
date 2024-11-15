@@ -15,3 +15,6 @@ class StudentRepo(object):
             raise ValueError("id existent \n")
 
         self.__student_list[id_student] = student
+
+    def delete_student(self, student_id: int):
+        self.__student_list.pop(student_id)

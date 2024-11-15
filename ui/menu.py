@@ -1,3 +1,6 @@
+import os
+
+
 class Consola:
     def __init__(self, student_service, laborator_service):
         self.__student_service = student_service
@@ -7,6 +10,8 @@ class Consola:
             "add_laborator": self.__ui_add_laborator,
             "show_students": self.__ui_show_studenti,
             "show_laborators": self.__ui_show_laborators,
+            "delete_student": self.__ui_delete_student,
+            "delete_laborator": self.__ui_delete_laborator,
         }
 
     def __ui_add_student(self):
@@ -32,6 +37,16 @@ class Consola:
         for lab in labs:
             print(lab)
 
+    def __ui_delete_student(self):
+        student_id = int(input("id>>>"))
+
+        self.__student_service.delete_student_from_list(student_id)
+
+    def __ui_delete_laborator(self):
+        lab_number = int(input("nrlab>>>"))
+
+        self.__laborator_service.delete_problem_from_list(lab_number)
+
     def run(self):
         while True:
             nume_comanda = input(">>>")
@@ -41,6 +56,9 @@ class Consola:
 
             if nume_comanda == "exit":
                 break
+
+            if nume_comanda == "cls":
+                os.system("cls")
 
             if nume_comanda in self.__comenzi:
                 try:
