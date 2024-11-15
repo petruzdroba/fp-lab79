@@ -1,10 +1,10 @@
 from domain.problema_lab import Problema_Laborator
-from domain.validators import Validator
+from validators.laborator_validator import LaboratorValidator
 
 
 class Problema_Service(object):
     def __init__(self) -> None:
-        pass
+        self.__valideaza_laborator = LaboratorValidator
 
     def add_problem_to_list(
         self, list_of_questions: list, problema: Problema_Laborator
@@ -16,9 +16,7 @@ class Problema_Service(object):
             problem : obj
         :returns : -
         """
-        valideaza = Validator()
-
-        valideaza.valideaza_problema(problema, list_of_questions)
+        self.__valideaza_laborator.valideaza_problema(problema, list_of_questions)
 
         list_of_questions.append(problema)
 
