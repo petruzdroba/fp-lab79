@@ -18,3 +18,11 @@ class StudentRepo(object):
 
     def delete_student(self, student_id: int):
         self.__student_list.pop(student_id)
+
+    def modify_student(self, student: Student):
+        id_student = student.get_id()
+
+        if id_student not in self.__student_list:
+            raise ValueError("id inexistent \n")
+
+        self.__student_list[id_student] = student

@@ -40,3 +40,11 @@ class Student_Service(object):
             self.__student_repo.delete_student(student_id)
         else:
             raise ValueError("student inexistent\n")
+
+    def modify_student_from_list(self, student_id: int, nume_nou: str, grupa_noua: int):
+
+        student_modificat = Student(student_id, nume_nou, grupa_noua)
+
+        self.__valideaza_student.valideaza_student(student_modificat)
+
+        self.__student_repo.modify_student(student_modificat)
