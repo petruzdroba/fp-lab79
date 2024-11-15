@@ -34,10 +34,9 @@ class Student_Service(object):
         :return -
             raise ValueError cu mesajul "student inexistent"
         """
-        found = True
         key_list = self.__student_repo.get_student_list()
 
         if student_id in key_list:
-            print("okay")
+            self.__student_repo.delete_student(student_id)
         else:
-            print("not okay")
+            raise ValueError("student inexistent\n")
