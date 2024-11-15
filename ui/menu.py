@@ -13,6 +13,7 @@ class Consola:
             "delete_student": self.__ui_delete_student,
             "delete_laborator": self.__ui_delete_laborator,
             "modify_student": self.__ui_modify_student,
+            "modify_laborator": self.__ui_modify_laborator,
         }
 
     def __ui_add_student(self):
@@ -54,6 +55,15 @@ class Consola:
         grupa = int(input("grupa_n>>>"))
 
         self.__student_service.modify_student_from_list(id_student, nume, grupa)
+
+    def __ui_modify_laborator(self):
+        numar_laborator = int(input("nrlab>>>"))
+        descriere = input("descriere_n>>>")
+        deadline = input("deadline_n>>>")
+
+        self.__laborator_service.modify_laborator_from_list(
+            numar_laborator, descriere, deadline
+        )
 
     def run(self):
         while True:

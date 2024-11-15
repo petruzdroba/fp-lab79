@@ -37,3 +37,15 @@ class Problema_Service(object):
             self.__laborator_repo.delete_laborator(laborator_number)
         else:
             raise ValueError("laborator inexistent")
+
+    def modify_laborator_from_list(
+        self, numar_laborator: int, descriere_noua: str, deadline_nou: str
+    ):
+
+        laborator_nou = Problema_Laborator(
+            numar_laborator, descriere_noua, deadline_nou
+        )
+
+        self.__valideaza_laborator.valideaza_laborator(laborator_nou)
+
+        self.__laborator_repo.modify_laborator(laborator_nou)
