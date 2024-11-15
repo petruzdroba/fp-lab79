@@ -12,3 +12,6 @@ class LaboratorRepo(object):
         numar_lab = laborator.get_laborator_numar()
 
         self.__laborator_list[numar_lab] = laborator
+
+    def delete_laborator(self, lab_nr: int):
+        self.__laborator_list.pop(lab_nr)

@@ -11,6 +11,7 @@ class Consola:
             "show_students": self.__ui_show_studenti,
             "show_laborators": self.__ui_show_laborators,
             "delete_student": self.__ui_delete_student,
+            "delete_laborator": self.__ui_delete_laborator,
         }
 
     def __ui_add_student(self):
@@ -40,6 +41,11 @@ class Consola:
         student_id = int(input("id>>>"))
 
         self.__student_service.delete_student_from_list(student_id)
+
+    def __ui_delete_laborator(self):
+        lab_number = int(input("nrlab>>>"))
+
+        self.__laborator_service.delete_problem_from_list(lab_number)
 
     def run(self):
         while True:
