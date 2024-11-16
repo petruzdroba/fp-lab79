@@ -42,9 +42,25 @@ class Student_Service(object):
             raise ValueError("student inexistent\n")
 
     def modify_student_from_list(self, student_id: int, nume_nou: str, grupa_noua: int):
+        """
+        Functie care modifica datele unui student cu id-ul : student_id
+        """
 
         student_modificat = Student(student_id, nume_nou, grupa_noua)
 
         self.__valideaza_student.valideaza_student(student_modificat)
 
         self.__student_repo.modify_student(student_modificat)
+
+    def search_student_from_list(self, id: int):
+        """
+        Functie care returneaza un obiect de tipul student, gasit in repo, pe baza idului acestuia
+        input:
+            id : int
+        output:
+            student : Student
+        """
+
+        self.__valideaza_student.valideaza_student(Student(id, "a", 1))
+
+        return self.__student_repo.get_student_by_name(id)
