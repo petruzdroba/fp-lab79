@@ -8,10 +8,12 @@ from tester.student_test import StudentTest
 from validators.laborator_validator import LaboratorValidator
 from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
+from tester.laboartor_test import LaboratorTest
 
 import os
 
 StudentTest().run_all_student_test()
+LaboratorTest().run_all_lab_test()
 
 # os.system("cls")
 
