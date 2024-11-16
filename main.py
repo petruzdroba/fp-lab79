@@ -13,6 +13,7 @@ import os
 
 StudentTest().run_all_student_test()
 
+# os.system("cls")
 
 validator_student = StudentValidator()
 repo_student = StudentRepo()
