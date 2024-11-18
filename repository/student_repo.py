@@ -27,7 +27,8 @@ class StudentRepo(object):
 
         self.__student_list[id_student] = student
 
-    def get_student_by_name(self, id: int):
-        for student in self.__student_list:
-            if id in student:
-                return student.values()
+    def get_student_by_id(self, id_student: int):
+        if id_student not in self.__student_list:
+            raise ValueError("id inexistent \n")
+
+        return self.__student_list[id_student]

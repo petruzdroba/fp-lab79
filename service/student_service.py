@@ -63,4 +63,4 @@ class Student_Service(object):
 
         self.__valideaza_student.valideaza_student(Student(id, "a", 1))
 
-        return self.__student_repo.get_student_by_name(id)
+        return self.__student_repo.get_student_by_id(id)
