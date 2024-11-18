@@ -9,6 +9,7 @@ from validators.laborator_validator import LaboratorValidator
 from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
 from tester.laborator_test import LaboratorTest
+import random
 
 import os
 
@@ -20,6 +21,7 @@ LaboratorTest().run_all_lab_test()
 validator_student = StudentValidator()
 repo_student = StudentRepo()
 service_student = Student_Service(validator_student, repo_student)
+service_student.generate_nr_students_random(random.randint(10, 21))
 
 validator_laborator = LaboratorValidator()
 repo_laborator = LaboratorRepo()
