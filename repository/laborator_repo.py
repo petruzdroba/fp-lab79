@@ -26,3 +26,9 @@ class LaboratorRepo(object):
             raise ValueError("numar laborator inexistent \n")
 
         self.__laborator_list[numar_lab] = laborator
+
+    def get_lab_by_laborator_numar(self, numar_lab: int):
+        if numar_lab not in self.__laborator_list:
+            raise ValueError("numar laborator inexistent \n")
+
+        return self.__laborator_list[numar_lab]

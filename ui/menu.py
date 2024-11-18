@@ -14,6 +14,8 @@ class Consola:
             "delete_laborator": self.__ui_delete_laborator,
             "modify_student": self.__ui_modify_student,
             "modify_laborator": self.__ui_modify_laborator,
+            "search_student": self.__ui_search_student,
+            "search_laborator": self.__ui_search_laborator,
         }
 
     def __ui_add_student(self):
@@ -64,6 +66,16 @@ class Consola:
         self.__laborator_service.modify_laborator_from_list(
             numar_laborator, descriere, deadline
         )
+
+    def __ui_search_student(self):
+        id_student = int(input("id>>>"))
+
+        print(self.__student_service.search_student_from_list(id_student))
+
+    def __ui_search_laborator(self):
+        numar_laborator = int(input("nrlab>>>"))
+
+        print(self.__laborator_service.search_laborator_from_list(numar_laborator))
 
     def run(self):
         while True:

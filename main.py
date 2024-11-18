@@ -8,7 +8,7 @@ from tester.student_test import StudentTest
 from validators.laborator_validator import LaboratorValidator
 from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
-from tester.laboartor_test import LaboratorTest
+from tester.laborator_test import LaboratorTest
 
 import os
 

@@ -49,3 +49,17 @@ class Problema_Service(object):
         self.__valideaza_laborator.valideaza_laborator(laborator_nou)
 
         self.__laborator_repo.modify_laborator(laborator_nou)
+
+    def search_laborator_from_list(self, numar_laborator: int):
+        """
+        Functie care valideaza datele de la tastatura si returneaza un laborator cu numar laborator numar_laborat
+        input:
+            numar_laborator :int
+        return:
+            un obiect de tip Problema
+        """
+        self.__valideaza_laborator.valideaza_laborator(
+            Problema_Laborator(numar_laborator, "a", "a")
+        )
+
+        return self.__laborator_repo.get_lab_by_laborator_numar(numar_laborator)

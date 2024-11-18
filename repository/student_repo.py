@@ -26,3 +26,9 @@ class StudentRepo(object):
             raise ValueError("id inexistent \n")
 
         self.__student_list[id_student] = student
+
+    def get_student_by_id(self, id_student: int):
+        if id_student not in self.__student_list:
+            raise ValueError("id inexistent \n")
+
+        return self.__student_list[id_student]
