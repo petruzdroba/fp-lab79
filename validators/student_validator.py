@@ -14,16 +14,11 @@ class StudentValidator(object):
         :return : -
                 raise ValueError with the message "id invalid", "nume invalid", "grupa invalida"
         """
+
         if student.get_id() < 0:
             raise ValueError("id invalid")
-
-        nume = student.get_nume().strip()
-        if nume == "":
-            erori += "nume invalid!\n"
-        elif not nume.isalpha():
-            erori += "numele trebuie să conțină doar litere!\n"
-        elif not nume.istitle():
-            erori += "nume trebuie să înceapă cu literă mare!\n"
+        if student.get_nume() == "":
+            raise ValueError("nume invalid")
 
         if student.get_grupa() < 0:
             raise ValueError("grupa invalida")
