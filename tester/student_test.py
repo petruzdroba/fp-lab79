@@ -2,6 +2,7 @@ from domain.student import Student
 from service.student_service import Student_Service
 from validators.student_validator import StudentValidator
 from repository.student_repo import StudentRepo
+import random
 
 
 class StudentTest(object):
@@ -16,6 +17,8 @@ class StudentTest(object):
         self.__test_search()
 
         self.__test_delete()
+
+        self.__test_random_generator()
 
     def __test_create_student(self):
         test_id = 13
@@ -58,4 +61,17 @@ class StudentTest(object):
             test_student.get_id() == test_id
             and test_student.get_nume() == test_nume
             and test_student.get_grupa() == test_grupa
+        )
+
+    def __test_random_generator(self):
+        random.seed(69)
+
+        self.__test_service.generate_nr_students_random(1)
+
+        test_student = self.__test_service.search_student_from_list(703)
+
+        assert (
+            test_student.get_nume() == "Dmy Tsam"
+            and test_student.get_id() == 703
+            and test_student.get_grupa() == 73
         )
