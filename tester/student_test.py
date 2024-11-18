@@ -14,6 +14,7 @@ class StudentTest(object):
         self.__test_create_student()
         self.__test_add()
         self.__test_search()
+
         self.__test_delete()
 
     def __test_create_student(self):

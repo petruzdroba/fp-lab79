@@ -13,6 +13,9 @@ class LaboratorTest(object):
     def run_all_lab_test(self):
         self.__test_create_lab()
         self.__test_add()
+        self.__test_search()
+
+        self.__test_delete()
 
     def __test_create_lab(self):
         test_lab_nr = 13
@@ -44,3 +47,16 @@ class LaboratorTest(object):
         self.__test_service.delete_problem_from_list(test_lab_nr)
 
         assert test_lab_nr not in self.__test_repo.get_laborators_list()
+
+    def __test_search(self):
+        test_lab_nr = 13
+        test_descriere = "Test"
+        test_deadline = "12.12.2012"
+
+        test_lab = self.__test_service.search_laborator_from_list(test_lab_nr)
+
+        assert (
+            test_lab.get_laborator_numar() == test_lab_nr
+            and test_lab.get_descriere() == test_descriere
+            and test_lab.get_deadline() == test_deadline
+        )
