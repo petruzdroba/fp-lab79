@@ -28,6 +28,7 @@ class NotaTest(object):
         self.__test_create_nota()
         self.__test_add_nota()
         self.__test_get_notes_by_lab_alpha()
+        self.__test_get_notes_by_lab_grade()
 
     def __test_create_nota(self):
         test_id = 13
@@ -76,11 +77,21 @@ class NotaTest(object):
         test_student = Student(test_id, test_nume, test_grupa)
         self.__test_student_repo.add_student(test_student)
 
-        self.__test_service.add_nota_to_list(14, test_id, 13, 5)
+        self.__test_service.add_nota_to_list(14, test_id, 13, 10)
 
         sorted_dict_alpha = self.__test_service.get_notes_by_lab_alpha(test_lab_id)
 
         assert (
             sorted_dict_alpha[0]
-            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 5"
+            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10"
+        )
+
+    def __test_get_notes_by_lab_grade(self):
+        test_lab_id = 13
+
+        sorted_dict_grade = self.__test_service.get_notes_by_lab_grade(test_lab_id)
+
+        assert (
+            sorted_dict_grade[0]
+            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10"
         )

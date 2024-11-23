@@ -39,6 +39,17 @@ class NoteService(object):
         note_list = self.__repo_note.get_note_list().values()
         return [str(note) for note in note_list]
 
+    def __grades_by_lab(self, id_lab: int):
+        note_list = self.__repo_note.get_note_list().values()
+
+        note_filtered = {}
+
+        for nota in note_list:
+            if nota.get_laborator().get_laborator_numar() == id_lab:
+                note_filtered[nota.get_id_nota()] = nota
+
+        return note_filtered
+
     def __filter_alpha(self, dicts):
         sorted_dict = dict(
             sorted(dicts.items(), key=lambda item: item[1].get_student().get_nume())
@@ -52,13 +63,23 @@ class NoteService(object):
         """
         if id_laborator not in self.__laborator_repo.get_laborators_list():
             raise ValueError("id laborator inexistent")
-        note_list = self.__repo_note.get_note_list().values()
 
-        note_filtered = {}
-
-        for nota in note_list:
-            if nota.get_laborator().get_laborator_numar() == id_laborator:
-                note_filtered[nota.get_id_nota()] = nota
+        note_filtered = self.__grades_by_lab(id_laborator)
 
         note_filtered = self.__filter_alpha(note_filtered).values()
+        return [str(note) for note in note_filtered]
+
+    def __filter_grade(self, dicts):
+        sorted_dict = dict(
+            sorted(dicts.items(), key=lambda item: item[1].get_nota(), reverse=True)
+        )
+        return sorted_dict
+
+    def get_notes_by_lab_grade(self, id_laborator: int):
+        if id_laborator not in self.__laborator_repo.get_laborators_list():
+            raise ValueError("id laborator inexistent")
+
+        note_filtered = self.__grades_by_lab(id_laborator)
+        note_filtered = self.__filter_grade(note_filtered).values()
+
         return [str(note) for note in note_filtered]
