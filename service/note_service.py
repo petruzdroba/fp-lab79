@@ -92,7 +92,10 @@ class NoteService(object):
             if nota.get_student().get_id() == id_student:
                 total += nota.get_nota()
                 nr += 1
-        return total / nr
+        if nr != 0:
+            return total / nr
+        else:
+            return 10.0
 
     def get_grade_under(self):
         students = self.__student_repo.get_student_list().values()

@@ -21,6 +21,7 @@ class Consola:
             "show_note": self.__ui_show_note,
             "show_note_a": self.__ui_show_note_lab_name,
             "show_note_n": self.__ui_show_note_lab_grade,
+            "show_u": self.__ui_show_underachievers,
         }
 
     def __ui_add_student(self):
@@ -106,6 +107,13 @@ class Consola:
         note = self.__note_service.get_notes_by_lab_grade(numar_laborator)
         for nota in note:
             print(nota)
+
+    def __ui_show_underachievers(self):
+        underachivers = self.__note_service.get_grade_under()
+        for student in underachivers.keys():
+            print(
+                f"nume : {underachivers[student]['name']}- medie laboratoare : {underachivers[student]['avg']} "
+            )
 
     def run(self):
         while True:
