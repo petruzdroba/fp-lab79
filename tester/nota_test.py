@@ -27,6 +27,7 @@ class NotaTest(object):
     def run_all_nota_test(self):
         self.__test_create_nota()
         self.__test_add_nota()
+        self.__test_get_notes_by_lab_alpha()
 
     def __test_create_nota(self):
         test_id = 13
@@ -64,3 +65,21 @@ class NotaTest(object):
         )
 
         assert test_id_nota in self.__test_note_repo.get_note_list()
+
+    def __test_get_notes_by_lab_alpha(self):
+        test_lab_id = 13
+
+        test_id = 14
+        test_nume = "Aohn Doe"
+        test_grupa = 217
+
+        test_student = Student(test_id, test_nume, test_grupa)
+        self.__test_student_repo.add_student(test_student)
+
+        self.__test_service.add_nota_to_list(14, test_id, 13, 5)
+
+        sorted_dict_alpha = self.__test_service.get_notes_by_lab_alpha(test_lab_id)
+
+        first_key = next(iter(sorted_dict_alpha))
+
+        assert first_key == 14
