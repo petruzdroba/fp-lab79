@@ -11,7 +11,7 @@ class NoteService(object):
     def __init__(
         self,
         validator_note: NoteValidator,
-        repo_note,
+        repo_note: NoteRepo,
         repo_student: StudentRepo,
         repo_laborator: LaboratorRepo,
     ):
@@ -40,7 +40,6 @@ class NoteService(object):
         return [str(note) for note in note_list]
 
     def __filter_alpha(self, dicts):
-        # Sort dictionary by student names
         sorted_dict = dict(
             sorted(dicts.items(), key=lambda item: item[1].get_student().get_nume())
         )
@@ -61,4 +60,5 @@ class NoteService(object):
             if nota.get_laborator().get_laborator_numar() == id_laborator:
                 note_filtered[nota.get_id_nota()] = nota
 
-        return self.__filter_alpha(note_filtered)
+        note_filtered = self.__filter_alpha(note_filtered).values()
+        return [str(note) for note in note_filtered]

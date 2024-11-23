@@ -19,6 +19,7 @@ class Consola:
             "search_laborator": self.__ui_search_laborator,
             "add_nota": self.__ui_add_nota,
             "show_note": self.__ui_show_note,
+            "show_note_a": self.__ui_show_note_lab_name,
         }
 
     def __ui_add_student(self):
@@ -90,6 +91,12 @@ class Consola:
 
     def __ui_show_note(self):
         note = self.__note_service.get_all_notes()
+        for nota in note:
+            print(nota)
+
+    def __ui_show_note_lab_name(self):
+        numar_laborator = int(input("nrlab>>>"))
+        note = self.__note_service.get_notes_by_lab_alpha(numar_laborator)
         for nota in note:
             print(nota)
 

@@ -80,6 +80,7 @@ class NotaTest(object):
 
         sorted_dict_alpha = self.__test_service.get_notes_by_lab_alpha(test_lab_id)
 
-        first_key = next(iter(sorted_dict_alpha))
-
-        assert first_key == 14
+        assert (
+            sorted_dict_alpha[0]
+            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 5"
+        )
