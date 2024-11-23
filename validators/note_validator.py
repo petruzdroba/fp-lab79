@@ -16,15 +16,15 @@ class NoteValidator(object):
         :return -
         raise ValueError cu mesajul "laborator invalid", "student invalid", "id nota invalida", "nota invalida"
         """
-        try:
-            StudentValidator.valideaza_student(nota.get_student())
-        except ValueError:
-            raise ValueError("student invalid")
+        # try:
+        #     StudentValidator.valideaza_student(nota.get_student())
+        # except ValueError:
+        #     raise ValueError("student invalid")
 
-        try:
-            LaboratorValidator.valideaza_laborator(nota.get_laborator())
-        except ValueError:
-            raise ValueError("laborator invalid")
+        # try:
+        #     LaboratorValidator.valideaza_laborator(nota.get_laborator())
+        # except ValueError:
+        #     raise ValueError("laborator invalid")
 
         if nota.get_id_nota() < 0:
             raise ValueError("id nota invalida")
