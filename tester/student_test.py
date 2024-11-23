@@ -71,7 +71,7 @@ class StudentTest(object):
         test_student = self.__test_service.search_student_from_list(703)
 
         assert (
-            test_student.get_nume() == "Dmy Tsam"
+            test_student.get_nume() == "Dat Kueaeaox"
             and test_student.get_id() == 703
-            and test_student.get_grupa() == 73
+            and test_student.get_grupa() == 74
         )

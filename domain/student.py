@@ -23,8 +23,4 @@ class Student(object):
         return self.__student_id == value.get_id()
 
     def __str__(self):
-        return f"""
-    NUME : {self.__nume}
-    ID : {self.__student_id}
-    GRUPA : {self.__grupa}  
-    """
+        return f"""NUME : {self.__nume}    ID : {self.__student_id}   GRUPA : {self.__grupa}  """

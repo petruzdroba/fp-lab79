@@ -10,6 +10,9 @@ from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
 from tester.laborator_test import LaboratorTest
 
+from validators.note_validator import NoteValidator
+from repository.note_repo import NoteRepo
+from service.note_service import NoteService
 from tester.nota_test import NotaTest
 
 import random
@@ -30,6 +33,10 @@ validator_laborator = LaboratorValidator()
 repo_laborator = LaboratorRepo()
 service_laborator = Problema_Service(validator_laborator, repo_laborator)
 
-ui = Consola(service_student, service_laborator)
+validator_note = NoteValidator()
+repo_note = NoteRepo()
+service_note = NoteService(validator_note, repo_note, repo_student, repo_laborator)
+
+ui = Consola(service_student, service_laborator, service_note)
 
 ui.run()

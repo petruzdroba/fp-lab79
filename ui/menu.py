@@ -2,9 +2,10 @@ import os
 
 
 class Consola:
-    def __init__(self, student_service, laborator_service):
+    def __init__(self, student_service, laborator_service, note_service):
         self.__student_service = student_service
         self.__laborator_service = laborator_service
+        self.__note_service = note_service
         self.__comenzi = {
             "add_student": self.__ui_add_student,
             "add_laborator": self.__ui_add_laborator,
@@ -16,6 +17,7 @@ class Consola:
             "modify_laborator": self.__ui_modify_laborator,
             "search_student": self.__ui_search_student,
             "search_laborator": self.__ui_search_laborator,
+            "add_nota": self.__ui_add_nota,
         }
 
     def __ui_add_student(self):
@@ -76,6 +78,14 @@ class Consola:
         numar_laborator = int(input("nrlab>>>"))
 
         print(self.__laborator_service.search_laborator_from_list(numar_laborator))
+
+    def __ui_add_nota(self):
+        id_nota = int(input("id_nota>>>"))
+        id_student = int(input("id_student>>>"))
+        numar_laborator = int(input("nrlab>>>"))
+        nota = int(input("nota>>>"))
+
+        self.__note_service.add_nota_to_list(id_nota, id_student, numar_laborator, nota)
 
     def run(self):
         while True:
