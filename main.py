@@ -22,7 +22,7 @@ StudentTest().run_all_student_test()
 LaboratorTest().run_all_lab_test()
 NotaTest().run_all_nota_test()
 
-# os.system("cls")
+os.system("cls")
 
 validator_student = StudentValidator()
 repo_student = StudentRepo()

@@ -29,6 +29,7 @@ class NotaTest(object):
         self.__test_add_nota()
         self.__test_get_notes_by_lab_alpha()
         self.__test_get_notes_by_lab_grade()
+        self.__test_get_grade_under()
 
     def __test_create_nota(self):
         test_id = 13
@@ -95,3 +96,17 @@ class NotaTest(object):
             sorted_dict_grade[0]
             == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10"
         )
+
+    def __test_get_grade_under(self):
+        test_id = 15
+        test_nume = "Xhing Doe"
+        test_grupa = 217
+
+        test_student = Student(test_id, test_nume, test_grupa)
+        self.__test_student_repo.add_student(test_student)
+
+        self.__test_service.add_nota_to_list(15, test_id, 13, 3)
+
+        assert self.__test_service.get_grade_under() == {
+            15: {"name": "Xhing Doe", "avg": 3.0}
+        }

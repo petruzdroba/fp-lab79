@@ -83,3 +83,28 @@ class NoteService(object):
         note_filtered = self.__filter_grade(note_filtered).values()
 
         return [str(note) for note in note_filtered]
+
+    def __calculate_grade_average(self, id_student: int):
+        grades = self.__repo_note.get_note_list().values()
+        total = 0
+        nr = 0
+        for nota in grades:
+            if nota.get_student().get_id() == id_student:
+                total += nota.get_nota()
+                nr += 1
+        return total / nr
+
+    def get_grade_under(self):
+        students = self.__student_repo.get_student_list().values()
+
+        underachievers = {}
+
+        for student in students:
+            avg = self.__calculate_grade_average(student.get_id())
+            if avg < 5.0:
+                underachievers[student.get_id()] = {
+                    "name": student.get_nume(),
+                    "avg": avg,
+                }
+
+        return underachievers
