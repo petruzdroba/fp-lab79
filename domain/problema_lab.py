@@ -23,8 +23,4 @@ class Problema_Laborator(object):
         return self.__laborator_numar == value.get_laborator_numar()
 
     def __str__(self):
-        return f"""
-    LABORATOR : {self.__laborator_numar}
-    DESCRIERE : {self.__descriere}
-    DEADLINE : {self.__deadline}
-    """
+        return f"""LABORATOR : {self.__laborator_numar}    DESCRIERE : {self.__descriere}  DEADLINE : {self.__deadline}"""

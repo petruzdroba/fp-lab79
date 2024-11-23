@@ -18,6 +18,7 @@ class Consola:
             "search_student": self.__ui_search_student,
             "search_laborator": self.__ui_search_laborator,
             "add_nota": self.__ui_add_nota,
+            "show_note": self.__ui_show_note,
         }
 
     def __ui_add_student(self):
@@ -86,6 +87,11 @@ class Consola:
         nota = int(input("nota>>>"))
 
         self.__note_service.add_nota_to_list(id_nota, id_student, numar_laborator, nota)
+
+    def __ui_show_note(self):
+        note = self.__note_service.get_all_notes()
+        for nota in note:
+            print(nota)
 
     def run(self):
         while True:

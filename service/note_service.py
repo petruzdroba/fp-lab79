@@ -34,3 +34,7 @@ class NoteService(object):
         self.__validator_note.valideaza_nota(nota_noua)
 
         self.__repo_note.add_nota(nota_noua)
+
+    def get_all_notes(self):
+        note_list = self.__repo_note.get_note_list().values()
+        return [str(note) for note in note_list]

@@ -16,3 +16,9 @@ class Note:
 
     def get_nota(self):
         return self.__nota
+
+    def __str__(self) -> str:
+        return f"""ID: {self.__id_nota}
+    STUDENT : {self.__student}
+    LAB : {self.__laborator}
+    NOTA : {self.__nota}"""
