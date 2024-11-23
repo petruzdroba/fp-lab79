@@ -3,6 +3,7 @@ class Student(object):
         self.__student_id = student_id
         self.__nume = nume
         self.__grupa = grupa
+        self.__deleted = False
 
     def set_nume(self, nume_nou: str):
         self.__nume = nume_nou
@@ -18,6 +19,12 @@ class Student(object):
 
     def get_grupa(self):
         return self.__grupa
+
+    def is_deleted(self):
+        return self.__deleted
+
+    def delete(self):
+        self.__deleted = True
 
     def __eq__(self, value: object) -> bool:
         return self.__student_id == value.get_id()
