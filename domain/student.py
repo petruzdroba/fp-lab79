@@ -19,6 +19,9 @@ class Student(object):
     def get_grupa(self):
         return self.__grupa
 
+    def __eq__(self, value: object) -> bool:
+        return self.__student_id == value.get_id()
+
     def __str__(self):
         return f"""
     NUME : {self.__nume}

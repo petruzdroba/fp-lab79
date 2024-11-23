@@ -9,12 +9,15 @@ from validators.laborator_validator import LaboratorValidator
 from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
 from tester.laborator_test import LaboratorTest
-import random
 
+from tester.nota_test import NotaTest
+
+import random
 import os
 
 StudentTest().run_all_student_test()
 LaboratorTest().run_all_lab_test()
+NotaTest().run_all_nota_test()
 
 # os.system("cls")
 

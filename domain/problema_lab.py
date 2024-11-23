@@ -19,6 +19,9 @@ class Problema_Laborator(object):
     def get_deadline(self):
         return self.__deadline
 
+    def __eq__(self, value: object) -> bool:
+        return self.__laborator_numar == value.get_laborator_numar()
+
     def __str__(self):
         return f"""
     LABORATOR : {self.__laborator_numar}
