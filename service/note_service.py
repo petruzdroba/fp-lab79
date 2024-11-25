@@ -1,4 +1,6 @@
 from domain.note import Note
+from domain.dto import DTO
+
 from validators.note_validator import NoteValidator
 
 
@@ -105,9 +107,6 @@ class NoteService(object):
         for student in students:
             avg = self.__calculate_grade_average(student.get_id())
             if avg < 5.0:
-                underachievers[student.get_id()] = {
-                    "name": student.get_nume(),
-                    "avg": avg,
-                }
+                underachievers[student.get_id()] = DTO(student.get_nume(), avg)
 
         return underachievers

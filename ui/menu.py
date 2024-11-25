@@ -110,10 +110,8 @@ class Consola:
 
     def __ui_show_underachievers(self):
         underachivers = self.__note_service.get_grade_under()
-        for student in underachivers.keys():
-            print(
-                f"nume : {underachivers[student]['name']}- medie laboratoare : {underachivers[student]['avg']} "
-            )
+        for student in underachivers.values():
+            print(student)
 
     def run(self):
         while True:

@@ -1,6 +1,7 @@
 from domain.note import Note
 from domain.student import Student
 from domain.problema_lab import Problema_Laborator
+from domain.dto import DTO
 
 from repository.note_repo import NoteRepo
 from repository.student_repo import StudentRepo
@@ -107,6 +108,4 @@ class NotaTest(object):
 
         self.__test_service.add_nota_to_list(15, test_id, 13, 3)
 
-        assert self.__test_service.get_grade_under() == {
-            15: {"name": "Xhing Doe", "avg": 3.0}
-        }
+        assert self.__test_service.get_grade_under()[15] == DTO("Xhing Doe", 3.0)
