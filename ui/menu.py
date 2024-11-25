@@ -2,9 +2,10 @@ import os
 
 
 class Consola:
-    def __init__(self, student_service, laborator_service):
+    def __init__(self, student_service, laborator_service, note_service):
         self.__student_service = student_service
         self.__laborator_service = laborator_service
+        self.__note_service = note_service
         self.__comenzi = {
             "add_student": self.__ui_add_student,
             "add_laborator": self.__ui_add_laborator,
@@ -16,6 +17,12 @@ class Consola:
             "modify_laborator": self.__ui_modify_laborator,
             "search_student": self.__ui_search_student,
             "search_laborator": self.__ui_search_laborator,
+            "add_nota": self.__ui_add_nota,
+            "show_note": self.__ui_show_note,
+            "show_note_a": self.__ui_show_note_lab_name,
+            "show_note_n": self.__ui_show_note_lab_grade,
+            "show_u": self.__ui_show_underachievers,
+            "show_f": self.__ui_show_failed_labs,
         }
 
     def __ui_add_student(self):
@@ -76,6 +83,41 @@ class Consola:
         numar_laborator = int(input("nrlab>>>"))
 
         print(self.__laborator_service.search_laborator_from_list(numar_laborator))
+
+    def __ui_add_nota(self):
+        id_nota = int(input("id_nota>>>"))
+        id_student = int(input("id_student>>>"))
+        numar_laborator = int(input("nrlab>>>"))
+        nota = int(input("nota>>>"))
+
+        self.__note_service.add_nota_to_list(id_nota, id_student, numar_laborator, nota)
+
+    def __ui_show_note(self):
+        note = self.__note_service.get_all_notes()
+        for nota in note:
+            print(nota)
+
+    def __ui_show_note_lab_name(self):
+        numar_laborator = int(input("nrlab>>>"))
+        note = self.__note_service.get_notes_by_lab_alpha(numar_laborator)
+        for nota in note:
+            print(nota)
+
+    def __ui_show_note_lab_grade(self):
+        numar_laborator = int(input("nrlab>>>"))
+        note = self.__note_service.get_notes_by_lab_grade(numar_laborator)
+        for nota in note:
+            print(nota)
+
+    def __ui_show_underachievers(self):
+        underachivers = self.__note_service.get_grade_under()
+        for student in underachivers.values():
+            print(f"Student: {student}")
+
+    def __ui_show_failed_labs(self):
+        failed_labs = self.__note_service.get_laborator_fails()
+        for lab in failed_labs.values():
+            print(f"Laborator: {lab}")
 
     def run(self):
         while True:

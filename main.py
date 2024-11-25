@@ -9,14 +9,20 @@ from validators.laborator_validator import LaboratorValidator
 from repository.laborator_repo import LaboratorRepo
 from service.probleme_service import Problema_Service
 from tester.laborator_test import LaboratorTest
-import random
 
+from validators.note_validator import NoteValidator
+from repository.note_repo import NoteRepo
+from service.note_service import NoteService
+from tester.nota_test import NotaTest
+
+import random
 import os
 
 StudentTest().run_all_student_test()
 LaboratorTest().run_all_lab_test()
+NotaTest().run_all_nota_test()
 
-# os.system("cls")
+os.system("cls")
 
 validator_student = StudentValidator()
 repo_student = StudentRepo()
@@ -27,6 +33,10 @@ validator_laborator = LaboratorValidator()
 repo_laborator = LaboratorRepo()
 service_laborator = Problema_Service(validator_laborator, repo_laborator)
 
-ui = Consola(service_student, service_laborator)
+validator_note = NoteValidator()
+repo_note = NoteRepo()
+service_note = NoteService(validator_note, repo_note, repo_student, repo_laborator)
+
+ui = Consola(service_student, service_laborator, service_note)
 
 ui.run()

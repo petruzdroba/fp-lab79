@@ -71,7 +71,7 @@ class Student_Service(object):
         new_name += random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
         for index in range(0, number_char - 1):
-            new_name += random.choice("qwertyuiopasdfghjklzxcvbnm")
+            new_name += random.choice("qwertyuiopasdfghjklzxcvbnmeeaaiioouu")
 
         return new_name
 
