@@ -10,7 +10,7 @@ class DTO(object):
         return self.__avg
 
     def __str__(self) -> str:
-        return f"""Student: {self.__nume} avg:{self.__avg}"""
+        return f"""{self.__nume} avg:{self.__avg}"""
 
     def __eq__(self, value: object) -> bool:
         return self.__nume == value.get_nume()

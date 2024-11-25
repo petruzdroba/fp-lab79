@@ -22,6 +22,7 @@ class Consola:
             "show_note_a": self.__ui_show_note_lab_name,
             "show_note_n": self.__ui_show_note_lab_grade,
             "show_u": self.__ui_show_underachievers,
+            "show_f": self.__ui_show_failed_labs,
         }
 
     def __ui_add_student(self):
@@ -111,7 +112,12 @@ class Consola:
     def __ui_show_underachievers(self):
         underachivers = self.__note_service.get_grade_under()
         for student in underachivers.values():
-            print(student)
+            print(f"Student: {student}")
+
+    def __ui_show_failed_labs(self):
+        failed_labs = self.__note_service.get_laborator_fails()
+        for lab in failed_labs.values():
+            print(f"Laborator: {lab}")
 
     def run(self):
         while True:

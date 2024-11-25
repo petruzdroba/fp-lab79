@@ -31,6 +31,7 @@ class NotaTest(object):
         self.__test_get_notes_by_lab_alpha()
         self.__test_get_notes_by_lab_grade()
         self.__test_get_grade_under()
+        self.__test_get_laborator_fails()
 
     def __test_create_nota(self):
         test_id = 13
@@ -109,3 +110,15 @@ class NotaTest(object):
         self.__test_service.add_nota_to_list(15, test_id, 13, 3)
 
         assert self.__test_service.get_grade_under()[15] == DTO("Xhing Doe", 3.0)
+
+    def __test_get_laborator_fails(self):
+        test_lab_nr = 12
+        test_descriere = "Failed"
+        test_deadline = "12.12.2012"
+
+        test_lab = Problema_Laborator(test_lab_nr, test_descriere, test_deadline)
+        self.__test_lab_repo.add_laborator(test_lab)
+
+        self.__test_service.add_nota_to_list(1, 15, test_lab_nr, 1)
+
+        assert self.__test_service.get_laborator_fails()[12] == DTO("Failed", 1.0)
