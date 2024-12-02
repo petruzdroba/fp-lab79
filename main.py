@@ -25,9 +25,9 @@ NotaTest().run_all_nota_test()
 os.system("cls")
 
 validator_student = StudentValidator()
-repo_student = StudentRepo()
+repo_student = StudentRepo("students.txt")
 service_student = Student_Service(validator_student, repo_student)
-service_student.generate_nr_students_random(random.randint(10, 21))
+# service_student.generate_nr_students_random(random.randint(10, 21))
 
 validator_laborator = LaboratorValidator()
 repo_laborator = LaboratorRepo()

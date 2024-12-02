@@ -8,7 +8,7 @@ import random
 class StudentTest(object):
     def __init__(self):
         self.__test_validator = StudentValidator()
-        self.__test_repo = StudentRepo()
+        self.__test_repo = StudentRepo("test_students.txt")
         self.__test_service = Student_Service(self.__test_validator, self.__test_repo)
 
     def run_all_student_test(self):

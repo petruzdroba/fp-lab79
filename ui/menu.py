@@ -28,7 +28,10 @@ class Consola:
         id_student = int(input("id>>>"))
         nume = input("nume>>>")
         grupa = int(input("grupa>>>"))
-        self.__student_service.add_student_to_list(id_student, nume, grupa)
+        try:
+            self.__student_service.add_student_to_list(id_student, nume, grupa)
+        except ValueError as ve:
+            print(ve)
 
     def __ui_add_laborator(self):
         numar_lab = int(input("nrlab>>>"))

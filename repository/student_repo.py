@@ -2,8 +2,23 @@ from domain.student import Student
 
 
 class StudentRepo(object):
-    def __init__(self):
+    def __init__(self, file_path):
         self.__student_list = {}
+        self.__file_path = file_path
+        self.__read_students_from_file()
+
+    def __read_students_from_file(self):
+        with open(self.__file_path, "r") as f:
+            lines = f.readlines()
+            for line in lines:
+                line = line.strip()
+                if line is not "":
+                    parts = line.split(",")
+                    id_student = parts[0]
+                    nume = parts[1]
+                    grupa = parts[2]
+                    student = Student(id_student, nume, grupa)
+                    self.add_student(student)
 
     def get_student_list(self):
         return self.__student_list
