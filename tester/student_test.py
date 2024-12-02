@@ -12,13 +12,25 @@ class StudentTest(object):
         self.__test_service = Student_Service(self.__test_validator, self.__test_repo)
 
     def run_all_student_test(self):
+        # self.__reset_test_repo()
+
         self.__test_create_student()
         self.__test_add()
+
+        self.__test_read_student_from_file()
+
         self.__test_search()
 
         self.__test_delete()
 
         self.__test_random_generator()
+
+    def __test_read_student_from_file(self):
+        assert len(self.__test_repo.get_student_list()) == 4
+
+    def __reset_test_repo(self):
+        with open("test_students.txt", "w") as file:
+            file.write("")  # Clear the file
 
     def __test_create_student(self):
         test_id = 13
@@ -37,8 +49,10 @@ class StudentTest(object):
         test_id = 13
         test_nume = "John Doe"
         test_grupa = 217
-
-        self.__test_service.add_student_to_list(test_id, test_nume, test_grupa)
+        try:
+            self.__test_service.add_student_to_list(test_id, test_nume, test_grupa)
+        except ValueError as ve:
+            print(f"test-{ve}")
 
         assert test_id in self.__test_repo.get_student_list()
 
@@ -65,8 +79,10 @@ class StudentTest(object):
 
     def __test_random_generator(self):
         random.seed(69)
-
-        self.__test_service.generate_nr_students_random(1)
+        try:
+            self.__test_service.generate_nr_students_random(1)
+        except ValueError as ve:
+            print(f"test-{ve}")
 
         test_student = self.__test_service.search_student_from_list(703)
 

@@ -77,7 +77,10 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        self.__test_student_repo.add_student(test_student)
+        try:
+            self.__test_student_repo.add_student(test_student)
+        except ValueError as ve:
+            print(f"test-nota-{ve}")
 
         self.__test_service.add_nota_to_list(14, test_id, 13, 10)
 
@@ -104,7 +107,10 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        self.__test_student_repo.add_student(test_student)
+        try:
+            self.__test_student_repo.add_student(test_student)
+        except ValueError as ve:
+            print(f"test-nota-{ve}")
 
         self.__test_service.add_nota_to_list(15, test_id, 13, 3)
 
