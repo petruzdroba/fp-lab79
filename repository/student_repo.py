@@ -21,7 +21,7 @@ class StudentRepo(object):
                     self.__student_list[id_student] = student
 
     def __append_students_to_file(self, student: Student):
-        with open(self.__file_path, "r") as f:
+        with open(self.__file_path, "a") as f:
             f.write(f"{student.get_id()},{student.get_nume()},{student.get_grupa()}\n")
 
     def __overwrite_students_in_file(self):
