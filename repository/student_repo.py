@@ -18,7 +18,11 @@ class StudentRepo(object):
                     nume = parts[1]
                     grupa = int(parts[2])
                     student = Student(id_student, nume, grupa)
-                    self.add_student(student)
+                    self.__student_list[id_student] = student
+
+    def __append_students_to_file(self, student: Student):
+        with open(self.__file_path, "r") as f:
+            f.write(f"{student.get_id()},{student.get_nume()},{student.get_grupa()}\n")
 
     def __overwrite_students_in_file(self):
         with open(self.__file_path, "w") as f:
@@ -37,7 +41,7 @@ class StudentRepo(object):
             raise ValueError("id existent \n")
 
         self.__student_list[id_student] = student
-        self.__overwrite_students_in_file()
+        self.__append_students_to_file(student)
 
     def delete_student(self, student_id: int):
         self.__student_list[student_id].delete()
