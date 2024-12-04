@@ -16,7 +16,9 @@ class NotaTest(object):
     def __init__(self):
         self.__test_student_repo = StudentRepo("test_students.txt")
         self.__test_lab_repo = LaboratorRepo("test_laborator.txt")
-        self.__test_note_repo = NoteRepo()
+        self.__test_note_repo = NoteRepo(
+            self.__test_student_repo, self.__test_lab_repo, "test_note.txt"
+        )
         self.__test_note_validator = NoteValidator()
         self.__test_service = NoteService(
             self.__test_note_validator,
@@ -26,11 +28,17 @@ class NotaTest(object):
         )
 
     def run_all_nota_test(self):
+        self.__reset_test_repo()
         self.__test_create_nota()
         self.__test_add_nota()
         self.__test_get_notes_by_lab_alpha()
         self.__test_get_notes_by_lab_grade()
         self.__test_get_grade_under()
+
+    def __reset_test_repo(self):
+        self.__test_note_repo.get_note_list().clear()
+        with open("test_note.txt", "w") as file:
+            file.write("")
 
     def __test_create_nota(self):
         test_id = 13

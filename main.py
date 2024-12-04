@@ -34,7 +34,7 @@ repo_laborator = LaboratorRepo("laborators.txt")
 service_laborator = Problema_Service(validator_laborator, repo_laborator)
 
 validator_note = NoteValidator()
-repo_note = NoteRepo()
+repo_note = NoteRepo(repo_student, repo_laborator, "note.txt")
 service_note = NoteService(validator_note, repo_note, repo_student, repo_laborator)
 
 ui = Consola(service_student, service_laborator, service_note)
