@@ -30,7 +30,7 @@ service_student = Student_Service(validator_student, repo_student)
 # service_student.generate_nr_students_random(random.randint(10, 21))
 
 validator_laborator = LaboratorValidator()
-repo_laborator = LaboratorRepo()
+repo_laborator = LaboratorRepo("laborators.txt")
 service_laborator = Problema_Service(validator_laborator, repo_laborator)
 
 validator_note = NoteValidator()

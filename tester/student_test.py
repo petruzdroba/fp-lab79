@@ -24,7 +24,6 @@ class StudentTest(object):
         self.__test_random_generator()
 
     def __test_read_student_from_file(self):
-        print(self.__test_repo.get_student_list())
         assert len(self.__test_repo.get_student_list()) == 0
 
     def __reset_test_repo(self):

@@ -15,7 +15,7 @@ from service.note_service import NoteService
 class NotaTest(object):
     def __init__(self):
         self.__test_student_repo = StudentRepo("test_students.txt")
-        self.__test_lab_repo = LaboratorRepo()
+        self.__test_lab_repo = LaboratorRepo("test_laborator.txt")
         self.__test_note_repo = NoteRepo()
         self.__test_note_validator = NoteValidator()
         self.__test_service = NoteService(
