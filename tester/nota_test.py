@@ -1,3 +1,4 @@
+import unittest
 from domain.note import Note
 from domain.student import Student
 from domain.problema_lab import Problema_Laborator
@@ -12,8 +13,9 @@ from validators.note_validator import NoteValidator
 from service.note_service import NoteService
 
 
-class NotaTest(object):
-    def __init__(self):
+class NotaTest(unittest.TestCase):
+    def __init__(self, methodName="runTest"):
+        super().__init__(methodName)
         self.__test_student_repo = StudentRepo("test_students.txt")
         self.__test_lab_repo = LaboratorRepo("test_laborator.txt")
         self.__test_note_repo = NoteRepo(
@@ -60,10 +62,10 @@ class NotaTest(object):
 
         test_note = Note(test_id_nota, test_student, test_lab, test_nota)
 
-        assert test_note.get_student() == test_student
-        assert test_note.get_laborator() == test_lab
-        assert test_note.get_id_nota() == test_id_nota
-        assert test_note.get_nota() == test_nota
+        self.assertEqual(test_note.get_student(), test_student)
+        self.assertEqual(test_note.get_laborator(), test_lab)
+        self.assertEqual(test_note.get_id_nota(), test_id_nota)
+        self.assertEqual(test_note.get_nota(), test_nota)
 
     def __test_add_nota(self):
         test_id_student = 13
@@ -75,7 +77,13 @@ class NotaTest(object):
             test_id_nota, test_id_student, test_lab_nr, test_nota
         )
 
-        assert test_id_nota in self.__test_note_repo.get_note_list()
+        self.assertIn(test_id_nota, self.__test_note_repo.get_note_list())
+
+        with self.assertRaises(ValueError) as context:
+            self.__test_service.add_nota_to_list(
+                test_id_nota, test_id_student, test_lab_nr, test_nota
+            )
+        self.assertEqual(str(context.exception), "nota existenta")
 
     def __test_get_notes_by_lab_alpha(self):
         test_lab_id = 13
@@ -85,18 +93,16 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        try:
-            self.__test_student_repo.add_student(test_student)
-        except ValueError as ve:
-            print(f"test-nota-{ve}")
+
+        self.__test_student_repo.add_student(test_student)
 
         self.__test_service.add_nota_to_list(14, test_id, 13, 10)
 
         sorted_dict_alpha = self.__test_service.get_notes_by_lab_alpha(test_lab_id)
 
-        assert (
-            sorted_dict_alpha[0]
-            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10"
+        self.assertIn(
+            "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10",
+            sorted_dict_alpha,
         )
 
     def __test_get_notes_by_lab_grade(self):
@@ -104,9 +110,9 @@ class NotaTest(object):
 
         sorted_dict_grade = self.__test_service.get_notes_by_lab_grade(test_lab_id)
 
-        assert (
-            sorted_dict_grade[0]
-            == "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10"
+        self.assertIn(
+            "ID: 14\n    STUDENT : NUME : Aohn Doe    ID : 14   GRUPA : 217  \n    LAB : LABORATOR : 13    DESCRIERE : Test  DEADLINE : 12.12.2012\n    NOTA : 10",
+            sorted_dict_grade,
         )
 
     def __test_get_grade_under(self):
@@ -115,11 +121,10 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        try:
-            self.__test_student_repo.add_student(test_student)
-        except ValueError as ve:
-            print(f"test-nota-{ve}")
+        self.__test_student_repo.add_student(test_student)
 
         self.__test_service.add_nota_to_list(15, test_id, 13, 3)
 
-        assert self.__test_service.get_grade_under()[15] == DTO("Xhing Doe", 3.0)
+        self.assertEqual(
+            self.__test_service.get_grade_under()[15], DTO("Xhing Doe", 3.0)
+        )

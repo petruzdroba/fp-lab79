@@ -22,3 +22,6 @@ class Note:
     STUDENT : {self.__student}
     LAB : {self.__laborator}
     NOTA : {self.__nota}"""
+
+    def __eq__(self, value):
+        return self.__id_nota == value.get_id_nota()
