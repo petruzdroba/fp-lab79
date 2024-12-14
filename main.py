@@ -15,12 +15,15 @@ from repository.note_repo import NoteRepo
 from service.note_service import NoteService
 from tester.nota_test import NotaTest
 
+from tester.unit_test import UnitTest
+
 import random
 import os
 
 StudentTest().run_all_student_test()
 LaboratorTest().run_all_lab_test()
 NotaTest().run_all_nota_test()
+UnitTest().run_all_tests()
 
 os.system("cls")
 
