@@ -49,7 +49,10 @@ class StudentTest(object):
         test_id = 13
         test_nume = "John Doe"
         test_grupa = 217
-        self.__test_service.add_student_to_list(test_id, test_nume, test_grupa)
+        try:
+            self.__test_service.add_student_to_list(test_id, test_nume, test_grupa)
+        except ValueError as ve:
+            assert str(ve) == "id existent \n"
         assert test_id in self.__test_repo.get_student_list()
 
     def __test_delete(self):
