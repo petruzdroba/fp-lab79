@@ -97,7 +97,7 @@ class NoteService(object):
         if nr != 0:
             return total / nr
         else:
-            return None
+            return 10.0
 
     def get_grade_under(self):
         students = self.__student_repo.get_student_list().values()
@@ -106,33 +106,7 @@ class NoteService(object):
 
         for student in students:
             avg = self.__calculate_grade_average(student.get_id())
-            if avg is not None and avg < 5.0:
+            if avg < 5.0:
                 underachievers[student.get_id()] = DTO(student.get_nume(), avg)
 
         return underachievers
-
-    def __calculate_lab_grade_average(self, lab_id: int):
-        grades = self.__repo_note.get_note_list().values()
-        total = 0
-        nr = 0
-        for nota in grades:
-            if nota.get_laborator().get_laborator_numar() == lab_id:
-                total += nota.get_nota()
-                nr += 1
-        if nr != 0:
-            return total / nr
-        else:
-            return None
-        # return None if not nr else total/nr
-
-    def get_laborator_fails(self):
-        labs = self.__laborator_repo.get_laborators_list().values()
-
-        failed_labs = {}
-
-        for lab in labs:
-            avg = self.__calculate_lab_grade_average(lab.get_laborator_numar())
-            if avg is not None and avg < 5.0:
-                failed_labs[lab.get_laborator_numar()] = DTO(lab.get_descriere(), avg)
-
-        return failed_labs

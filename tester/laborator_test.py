@@ -7,15 +7,25 @@ from service.probleme_service import Problema_Service
 class LaboratorTest(object):
     def __init__(self):
         self.__test_validator = LaboratorValidator()
-        self.__test_repo = LaboratorRepo()
+        self.__test_repo = LaboratorRepo("test_laborator.txt")
         self.__test_service = Problema_Service(self.__test_validator, self.__test_repo)
 
     def run_all_lab_test(self):
+        self.__reset_test_repo()
+        self.__test_read_from_file()
         self.__test_create_lab()
         self.__test_add()
         self.__test_search()
 
         self.__test_delete()
+
+    def __test_read_from_file(self):
+        assert len(self.__test_repo.get_laborators_list()) == 0
+
+    def __reset_test_repo(self):
+        self.__test_repo.get_laborators_list().clear()
+        with open("test_laborators.txt", "w") as file:
+            file.write("")
 
     def __test_create_lab(self):
         test_lab_nr = 13

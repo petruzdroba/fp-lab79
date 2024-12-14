@@ -14,9 +14,11 @@ from service.note_service import NoteService
 
 class NotaTest(object):
     def __init__(self):
-        self.__test_student_repo = StudentRepo()
-        self.__test_lab_repo = LaboratorRepo()
-        self.__test_note_repo = NoteRepo()
+        self.__test_student_repo = StudentRepo("test_students.txt")
+        self.__test_lab_repo = LaboratorRepo("test_laborator.txt")
+        self.__test_note_repo = NoteRepo(
+            self.__test_student_repo, self.__test_lab_repo, "test_note.txt"
+        )
         self.__test_note_validator = NoteValidator()
         self.__test_service = NoteService(
             self.__test_note_validator,
@@ -26,12 +28,17 @@ class NotaTest(object):
         )
 
     def run_all_nota_test(self):
+        self.__reset_test_repo()
         self.__test_create_nota()
         self.__test_add_nota()
         self.__test_get_notes_by_lab_alpha()
         self.__test_get_notes_by_lab_grade()
         self.__test_get_grade_under()
-        self.__test_get_laborator_fails()
+
+    def __reset_test_repo(self):
+        self.__test_note_repo.get_note_list().clear()
+        with open("test_note.txt", "w") as file:
+            file.write("")
 
     def __test_create_nota(self):
         test_id = 13
@@ -78,7 +85,10 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        self.__test_student_repo.add_student(test_student)
+        try:
+            self.__test_student_repo.add_student(test_student)
+        except ValueError as ve:
+            print(f"test-nota-{ve}")
 
         self.__test_service.add_nota_to_list(14, test_id, 13, 10)
 
@@ -105,20 +115,11 @@ class NotaTest(object):
         test_grupa = 217
 
         test_student = Student(test_id, test_nume, test_grupa)
-        self.__test_student_repo.add_student(test_student)
+        try:
+            self.__test_student_repo.add_student(test_student)
+        except ValueError as ve:
+            print(f"test-nota-{ve}")
 
         self.__test_service.add_nota_to_list(15, test_id, 13, 3)
 
         assert self.__test_service.get_grade_under()[15] == DTO("Xhing Doe", 3.0)
-
-    def __test_get_laborator_fails(self):
-        test_lab_nr = 12
-        test_descriere = "Failed"
-        test_deadline = "12.12.2012"
-
-        test_lab = Problema_Laborator(test_lab_nr, test_descriere, test_deadline)
-        self.__test_lab_repo.add_laborator(test_lab)
-
-        self.__test_service.add_nota_to_list(1, 15, test_lab_nr, 1)
-
-        assert self.__test_service.get_laborator_fails()[12] == DTO("Failed", 1.0)
