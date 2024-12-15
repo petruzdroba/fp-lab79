@@ -42,9 +42,14 @@ class Student_Service(object):
         else:
             raise ValueError("student inexistent\n")
 
-    def modify_student_from_list(self, student_id: int, nume_nou: str, grupa_noua: int):
+    def modify_student_from_list(
+        self, student_id: int, nume_nou: str, grupa_noua: int
+    ) -> None:
         """
         Functie care modifica datele unui student cu id-ul : student_id
+        returneaza:
+            -nothing
+            -raises ValueError for empty name and for negative group or student_id
         """
 
         student_modificat = Student(student_id, nume_nou, grupa_noua)

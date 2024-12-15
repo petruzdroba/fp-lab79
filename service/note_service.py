@@ -74,7 +74,7 @@ class NoteService(object):
     def __filter_grade(self, dicts):
         sorted_dict = dict(
             sorted(dicts.items(), key=lambda item: item[1].get_nota(), reverse=True)
-        )
+        )  # Timsort nlogn
         return sorted_dict
 
     def get_notes_by_lab_grade(self, id_laborator: int):
@@ -87,6 +87,19 @@ class NoteService(object):
         return [str(note) for note in note_filtered]
 
     def __calculate_grade_average(self, id_student: int):
+        """
+        Analizare complexitate
+            l94 - O(m), obtinerea notelor e constanta, dar .values() trece rpin toate
+            l99->l106
+                l101 - comparare O constanta
+                l103 - .get_nota() O constanta
+                etc pana la l106 e constanta
+        Timp total O(n) - n este numarul de note din dictionar
+
+        Worst Case Scenario - toate notele partin studentului cu id_student, se trece prin toate cele n note - O(n)
+        Best Case Scenario - nicio nota nu apartie studentului cu id_student, tot se trece prin toate cele n note - O(n)
+
+        """
         grades = self.__repo_note.get_note_list().values()
         total = 0
         nr = 0
@@ -97,16 +110,16 @@ class NoteService(object):
         if nr != 0:
             return total / nr
         else:
-            return 10.0
+            return None
 
-    def get_grade_under(self):
+    def get_grade_under(self) -> dict:
         students = self.__student_repo.get_student_list().values()
 
         underachievers = {}
 
         for student in students:
             avg = self.__calculate_grade_average(student.get_id())
-            if avg < 5.0:
+            if avg is not None and avg < 5.0:
                 underachievers[student.get_id()] = DTO(student.get_nume(), avg)
 
         return underachievers
