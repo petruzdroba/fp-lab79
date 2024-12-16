@@ -58,6 +58,31 @@ class NoteService(object):
         )
         return sorted_dict
 
+    def __filter_grade(self, dicts):
+        sorted_dict = dict(
+            sorted(dicts.items(), key=lambda item: item[1].get_nota(), reverse=True)
+        )
+        return sorted_dict
+
+    def __insertion_sort(
+        self, iterable: dict, key: str = "get_nota", reversed: bool = False
+    ) -> dict:
+        arr = list(iterable.items())
+
+        for index in range(1, len(arr)):
+            pole = arr[index]
+            pole_value = getattr(pole[1], key)()
+            jndex = index - 1
+
+            while jndex >= 0 and getattr(arr[jndex][1], key)() > pole_value:
+                arr[jndex + 1] = arr[jndex]
+                jndex -= 1
+            arr[jndex + 1] = pole
+
+        if reversed:
+            arr.reverse()
+        return dict(arr)
+
     def get_notes_by_lab_alpha(self, id_laborator: int):
         """
         Functie care returneaza o lista de note la un laborator dat : id_laborator si o sorteaza
@@ -68,14 +93,9 @@ class NoteService(object):
 
         note_filtered = self.__grades_by_lab(id_laborator)
 
-        note_filtered = self.__filter_alpha(note_filtered).values()
+        # note_filtered = self.__filter_alpha(note_filtered).values()
+        note_filtered = self.__insertion_sort(note_filtered, "get_nota", True).values()
         return [str(note) for note in note_filtered]
-
-    def __filter_grade(self, dicts):
-        sorted_dict = dict(
-            sorted(dicts.items(), key=lambda item: item[1].get_nota(), reverse=True)
-        )  # Timsort nlogn
-        return sorted_dict
 
     def get_notes_by_lab_grade(self, id_laborator: int):
         if id_laborator not in self.__laborator_repo.get_laborators_list():

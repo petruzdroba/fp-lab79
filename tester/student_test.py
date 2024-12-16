@@ -22,7 +22,6 @@ class StudentTest(unittest.TestCase):
         self.__test_search()
         self.__test_delete()
         self.__test_random_generator()
-        print("sing if u rich")
 
     def __test_read_student_from_file(self):
         self.assertEqual(len(self.__test_repo.get_student_list()), 0)
