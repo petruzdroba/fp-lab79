@@ -26,10 +26,20 @@ class StudentRepo(object):
 
     def __overwrite_students_in_file(self):
         with open(self.__file_path, "w") as f:
-            for id_student in self.__student_list:
-                f.write(
-                    f"{id_student},{self.__student_list[id_student].get_nume()},{self.__student_list[id_student].get_grupa()}\n"
-                )
+            self.__recursive_write_students(f, self.__student_list)
+
+    def __recursive_write_students(self, file, student_dict: dict) -> None:
+        if not student_dict:
+            return  # base case
+
+        id_student, student = next(iter(student_dict.items()))
+
+        file.write(f"{id_student},{student.get_nume()},{student.get_grupa()}\n")
+
+        remaining_students = {
+            key: value for key, value in student_dict.items() if key != id_student
+        }
+        self.__recursive_write_students(file, remaining_students)
 
     def get_student_list(self):
         return self.__student_list

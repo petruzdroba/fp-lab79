@@ -25,10 +25,20 @@ class LaboratorRepo(object):
 
     def __overwrite_laborator_in_fisier(self):
         with open(self.__file_path, "w") as f:
-            for laborator in self.__laborator_list.values():
-                f.write(
-                    f"{laborator.get_laborator_numar()},{laborator.get_descriere()},{laborator.get_deadline()}\n"
-                )
+            self.__recursive_write_labs(f, self.__laborator_list)
+
+    def __recursive_write_labs(self, file, lab_dict: dict) -> None:
+        if not lab_dict:
+            return  # base case
+
+        id_lab, laborator = next(iter(lab_dict.items()))
+        file.write(f"{id_lab},{laborator.get_descriere()},{laborator.get_deadline()}\n")
+
+        remaining_labs = {
+            key: value for key, value in lab_dict.items() if key != id_lab
+        }
+
+        self.__recursive_write_labs(file, remaining_labs)
 
     def get_laborators_list(self):
         return self.__laborator_list
