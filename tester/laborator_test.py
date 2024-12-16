@@ -26,7 +26,7 @@ class LaboratorTest(unittest.TestCase):
 
     def __reset_test_repo(self):
         self.__test_repo.get_laborators_list().clear()
-        with open("test_laborators.txt", "w") as file:
+        with open("test_laborator.txt", "w") as file:
             file.write("")
 
     def __test_create_lab(self):
