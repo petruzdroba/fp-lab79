@@ -2,7 +2,7 @@ from domain.note import Note
 from domain.dto import DTO
 
 from validators.note_validator import NoteValidator
-from typing import Iterable
+from sorting.sort import Sort
 
 from repository.note_repo import NoteRepo
 from repository.student_repo import StudentRepo
@@ -52,22 +52,6 @@ class NoteService(object):
 
         return note_filtered
 
-    def __insertion_sort(self, iterable: Iterable, cmp, reversed: bool = False) -> dict:
-        arr = iterable
-
-        for index in range(1, len(arr)):
-            pole = arr[index]
-            jndex = index - 1
-
-            while jndex >= 0 and cmp(arr[jndex], pole):
-                arr[jndex + 1] = arr[jndex]
-                jndex -= 1
-            arr[jndex + 1] = pole
-
-        if reversed:
-            arr.reverse()
-        return arr
-
     def get_notes_by_lab_alpha(self, id_laborator: int):
         """
         Functie care returneaza o lista de note la un laborator dat : id_laborator si o sorteaza
@@ -80,33 +64,13 @@ class NoteService(object):
 
         # note_filtered = self.__filter_alpha(note_filtered).values()
         note_filtered = dict(
-            self.__insertion_sort(
+            Sort().insertion_sort(
                 list(note_filtered.items()),
                 lambda stud1, stud2: stud1[1].get_student().get_nume()[0].lower()
                 > stud2[1].get_student().get_nume()[0].lower(),
             )
         ).values()
         return [str(note) for note in note_filtered]
-
-    def __comb_sort(self, iterable: Iterable, cmp, reversed: bool = False) -> dict:
-        arr = iterable
-
-        lenght = len(arr)
-        gap = lenght
-        do_it_again = True
-
-        while gap != 1 or do_it_again == True:
-            gap = max(1, int(gap / 1.3))
-            do_it_again = False
-
-            for index in range(0, lenght - gap):
-                if cmp(arr[index], arr[index + gap]):
-                    arr[index], arr[index + gap] = arr[index + gap], arr[index]
-                    do_it_again = True
-
-        if reversed:
-            arr.reverse()
-        return arr
 
     def get_notes_by_lab_grade(self, id_laborator: int):
         if id_laborator not in self.__laborator_repo.get_laborators_list():
@@ -115,7 +79,7 @@ class NoteService(object):
         note_filtered = self.__grades_by_lab(id_laborator)
         # note_filtered = self.__filter_grade(note_filtered).values()
         note_filtered = dict(
-            self.__comb_sort(
+            Sort().comb_sort(
                 list(note_filtered.items()),
                 lambda nota1, nota2: nota1[1].get_nota() > nota2[1].get_nota(),
                 True,
